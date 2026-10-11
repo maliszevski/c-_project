@@ -13,7 +13,6 @@ int main() {
     
     while (running) { 
         print_menu();
-    
             switch (get_user_choice()) {
                 case 1:
                     if (relays[0].get_state() == true ) {
@@ -86,7 +85,6 @@ void print_menu(){
         std::cout << "*********************************" << std::endl;
         std::cout << "           Your choice:          " << std::endl;
 }
-
 
 //This function is getting user choice to control switch loop.
 //If user enters invalid value, the cin.fail() returns true and it will be repeating until user enters correct value (int).
