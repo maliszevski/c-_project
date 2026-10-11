@@ -13,7 +13,7 @@ bool Relay::toggle() {
 
 void Relay::turn_off() {
     state = false;
-    std::cout << "R" << name << "state OFF" << std::endl;
+    std::cout << "R" << name << " state OFF" << std::endl;
 }
 
 void Relay::show_state() const {

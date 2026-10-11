@@ -16,21 +16,33 @@ int main() {
     
             switch (get_user_choice()) {
                 case 1:
-                    std::cout << "R1 choosen." << std::endl;
-                    relays[0].toggle();
-                    relays[0].show_state();
+                    if (relays[0].get_state() == true ) {
+                        std::cout << "R1 already ON." << std::endl;
+                    } else {
+                        std::cout << "R1 choosen." << std::endl;
+                        relays[0].toggle();
+                        relays[0].show_state();
+                    }
                     break;
 
                 case 2:
-                    std::cout << "R2 choosen." << std::endl;
-                    relays[1].toggle();
-                    relays[1].show_state();
+                    if (relays[1].get_state() == true ) {
+                        std::cout << "R2 already ON." << std::endl;
+                    } else {
+                        std::cout << "R2 choosen." << std::endl;
+                        relays[1].toggle();
+                        relays[1].show_state();
+                    }
                     break;
 
                 case 3:
-                    std::cout << "R3 chosen." << std::endl;
-                    relays[2].toggle();
-                    relays[2].show_state();
+                    if (relays[2].get_state() == true ) {
+                        std::cout << "R3 already ON." << std::endl;
+                    } else {
+                        std::cout << "R3 choosen." << std::endl;
+                        relays[2].toggle();
+                        relays[2].show_state();
+                    }
                     break;
 
                 case 4:
@@ -42,13 +54,22 @@ int main() {
                 case 5: {
                     std::cout << "Which output to disable (1-3)?" << std::endl;
                     int output_to_disable = get_user_choice();
+                    
+                    if (output_to_disable >= 1 && output_to_disable <= 3) {
+                        relays[output_to_disable - 1].turn_off();
+                    } else {
+                        std::cout << "Invalid output number. Please choose between 1 and 3." << std::endl;
+                    
+                    }
                 }
-
+                    break;
+            
                 default:
                     std::cout << "Exiting program..." << std::endl;
                     running = false;
-            }
+                    break;
     }
+}
 }
 
 
