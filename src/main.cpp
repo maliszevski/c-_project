@@ -1,75 +1,57 @@
 #include <iostream>
 #include <string>
+#include "../include/relay.h"
+#include <array>
 
-
-void turn_off_output(bool &r_state, const std::string &name);
 void print_menu();
 int get_user_choice();
-void show_output_state(bool r_state, const std::string &name);
+
 
 int main() {
+    std::array<Relay, 3> relays = { Relay("1"), Relay("2"), Relay("3") };
     bool running = true;
-    bool r1_state = false;
-    bool r2_state = false;
-    bool r3_state = false;
-
+    
     while (running) { 
         print_menu();
     
-        switch (get_user_choice()) {
-            case 1:
-                std::cout << "R1 choosen." << std::endl;
-                r1_state = !r1_state;
-                show_output_state(r1_state, "1");
-                break;
+            switch (get_user_choice()) {
+                case 1:
+                    std::cout << "R1 choosen." << std::endl;
+                    relays[0].toggle();
+                    relays[0].show_state();
+                    break;
 
-            case 2:
-                std::cout << "R2 choosen." << std::endl;
-                r2_state = !r2_state;
-                show_output_state(r2_state, "2");
-                break;
+                case 2:
+                    std::cout << "R2 choosen." << std::endl;
+                    relays[1].toggle();
+                    relays[1].show_state();
+                    break;
 
-            case 3:
-                std::cout << "R3 choosen." << std::endl;
-                r3_state = !r3_state;
-                show_output_state(r3_state, "3");
-                break;
+                case 3:
+                    std::cout << "R3 chosen." << std::endl;
+                    relays[2].toggle();
+                    relays[2].show_state();
+                    break;
 
-            case 4:
-                show_output_state(r1_state, "1");
-                show_output_state(r2_state, "2");
-                show_output_state(r3_state, "3");
-                break;
+                case 4:
+                    for (int i = 0; i < relays.size(); i++) {
+                        relays[i].show_state();
+                    }
+                    break;
 
-            case 5: {
-                std::cout << "Which output to disable (1-3)?" << std::endl;
-                int output_to_disable = get_user_choice();
-
-                if (output_to_disable == 1){
-                    turn_off_output(r1_state, "1");
-                } else if (output_to_disable == 2) {
-                    turn_off_output(r2_state, "2");
-                } else if (output_to_disable == 3) {
-                    turn_off_output(r3_state, "3");
-                } else {
-                    std::cout << "Invalid output number!" << std::endl;
+                case 5: {
+                    std::cout << "Which output to disable (1-3)?" << std::endl;
+                    int output_to_disable = get_user_choice();
                 }
-                break;
-            }
 
-            default:
-                std::cout << "Exiting program..." << std::endl;
-                running = false;
-        }
+                default:
+                    std::cout << "Exiting program..." << std::endl;
+                    running = false;
+            }
     }
 }
 
-// This function is turning off the original variable by using reference.
-void turn_off_output(bool &r_state, const std::string &name){
-    r_state = false;
 
-    std::cout << "R" << name << " state OFF" << std::endl;
-}
 
 //Prints text menu.
 void print_menu(){ 
@@ -105,11 +87,3 @@ int get_user_choice(){
     }
 }
 
-//Shows output state.
-void show_output_state(bool r_state, const std::string &name){ 
-    if (r_state == true ){
-        std::cout << "R" << name << " state ON." << std::endl;
-    } else {
-        std::cout << "R" << name << " state OFF" << std::endl;
-    }
-}

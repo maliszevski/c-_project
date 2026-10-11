@@ -1,4 +1,4 @@
-#include "include/relay.h"
+#include "../include/relay.h"
 #include <iostream>
 
 Relay::Relay(const std::string &relay_name){
@@ -6,9 +6,9 @@ Relay::Relay(const std::string &relay_name){
     state = false;
 }
 
-void Relay::toggle() {
+bool Relay::toggle() {
     state = !state;
-    std::cout << "R" << name << " state ON" << std::endl; 
+    return state;
 }
 
 void Relay::turn_off() {
