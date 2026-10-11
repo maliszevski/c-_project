@@ -1,57 +1,11 @@
 #include <iostream>
 #include <string>
-using namespace std;
-
-// This function is turning off the original variable by using reference.
-void turn_off_output(bool &r_state, const string &name){
-    r_state = false;
-
-    cout << "R" << name << " state OFF" << endl;
-}
-
-//Prints text menu.
-void print_menu(){ 
-        cout << "*********************************" << endl;
-        cout << "*         Choose output:        *" << endl;
-        cout << "*1.             R1              *" << endl;
-        cout << "*2.             R2              *" << endl;
-        cout << "*3.             R3              *" << endl;
-        cout << "*4.      Show output state      *" << endl;
-        cout << "*5.        Disable output       *" << endl;
-        cout << "*********************************" << endl;
-        cout << "           Your choice:          " << endl;
-}
-
-//This function is getting user choice to control switch loop.
-//If user enters invalid value, the cin.fail() returns true and it will be repeating until user enters correct value (int).
-//Then, cin.clear(); is clearing cin error state due to invalid value.
-//Finally, cin.ignore(); is clearing invalid input (max 100 chars or up to the newline char.)
-int get_user_choice(){
-    int user_choice;
-
-    while (true) {
-        cin >> user_choice;
-        if (cin.fail()){
-            cout << "Invalid input. Try again." << endl;
-            cin.clear();
-            cin.ignore(100, '\n');
-        } else {
-            cin.ignore(100, '\n');
-            return user_choice;
-        }
-    }
-}
-
-//Shows output state.
-void show_output_state(bool r_state, const string &name){ 
-    if (r_state == true ){
-        cout << "R" << name << " state ON." << endl;
-    } else {
-        cout << "R" << name << " state OFF" << endl;
-    }
-}
 
 
+void turn_off_output(bool &r_state, const std::string &name);
+void print_menu();
+int get_user_choice();
+void show_output_state(bool r_state, const std::string &name);
 
 int main() {
     bool running = true;
@@ -64,19 +18,19 @@ int main() {
     
         switch (get_user_choice()) {
             case 1:
-                cout << "R1 choosen." << endl;
+                std::cout << "R1 choosen." << std::endl;
                 r1_state = !r1_state;
                 show_output_state(r1_state, "1");
                 break;
 
             case 2:
-                cout << "R2 choosen." << endl;
+                std::cout << "R2 choosen." << std::endl;
                 r2_state = !r2_state;
                 show_output_state(r2_state, "2");
                 break;
 
             case 3:
-                cout << "R3 choosen." << endl;
+                std::cout << "R3 choosen." << std::endl;
                 r3_state = !r3_state;
                 show_output_state(r3_state, "3");
                 break;
@@ -88,7 +42,7 @@ int main() {
                 break;
 
             case 5: {
-                cout << "Which output to disable (1-3)?" << endl;
+                std::cout << "Which output to disable (1-3)?" << std::endl;
                 int output_to_disable = get_user_choice();
 
                 if (output_to_disable == 1){
@@ -98,19 +52,64 @@ int main() {
                 } else if (output_to_disable == 3) {
                     turn_off_output(r3_state, "3");
                 } else {
-                    cout << "Invalid output number!" << endl;
+                    std::cout << "Invalid output number!" << std::endl;
                 }
                 break;
             }
 
             default:
-                cout << "Exiting program..." << endl;
+                std::cout << "Exiting program..." << std::endl;
                 running = false;
         }
     }
+}
 
+// This function is turning off the original variable by using reference.
+void turn_off_output(bool &r_state, const string &name){
+    r_state = false;
 
+    std::cout << "R" << name << " state OFF" << std::endl;
+}
 
+//Prints text menu.
+void print_menu(){ 
+        std::cout << "*********************************" << std::endl;
+        std::cout << "*         Choose output:        *" << std::endl;
+        std::cout << "* 1.             R1             *" << std::endl;
+        std::cout << "* 2.             R2             *" << std::endl;
+        std::cout << "* 3.             R3             *" << std::endl;
+        std::cout << "* 4.      Show output state     *" << std::endl;
+        std::cout << "* 5.        Disable output      *" << std::endl;
+        std::cout << "*********************************" << std::endl;
+        std::cout << "           Your choice:          " << std::endl;
 }
 
 
+//This function is getting user choice to control switch loop.
+//If user enters invalid value, the cin.fail() returns true and it will be repeating until user enters correct value (int).
+//Then, cin.clear(); is clearing cin error state due to invalid value.
+//Finally, cin.ignore(); is clearing invalid input (max 100 chars or up to the newline char.)
+int get_user_choice(){
+    int user_choice;
+
+    while (true) {
+        cin >> user_choice;
+        if (cin.fail()){
+            std::cout << "Invalid input. Try again." << std::endl;
+            cin.clear();
+            cin.ignore(100, '\n');
+        } else {
+            cin.ignore(100, '\n');
+            return user_choice;
+        }
+    }
+}
+
+//Shows output state.
+void show_output_state(bool r_state, const string &name){ 
+    if (r_state == true ){
+        std::cout << "R" << name << " state ON." << std::endl;
+    } else {
+        std::cout << "R" << name << " state OFF" << std::endl;
+    }
+}
