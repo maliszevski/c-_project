@@ -65,7 +65,7 @@ int main() {
 }
 
 // This function is turning off the original variable by using reference.
-void turn_off_output(bool &r_state, const string &name){
+void turn_off_output(bool &r_state, const std::string &name){
     r_state = false;
 
     std::cout << "R" << name << " state OFF" << std::endl;
@@ -93,20 +93,20 @@ int get_user_choice(){
     int user_choice;
 
     while (true) {
-        cin >> user_choice;
-        if (cin.fail()){
+        std::cin >> user_choice;
+        if (std::cin.fail()){
             std::cout << "Invalid input. Try again." << std::endl;
-            cin.clear();
-            cin.ignore(100, '\n');
+            std::cin.clear();
+            std::cin.ignore(100, '\n');
         } else {
-            cin.ignore(100, '\n');
+            std::cin.ignore(100, '\n');
             return user_choice;
         }
     }
 }
 
 //Shows output state.
-void show_output_state(bool r_state, const string &name){ 
+void show_output_state(bool r_state, const std::string &name){ 
     if (r_state == true ){
         std::cout << "R" << name << " state ON." << std::endl;
     } else {
