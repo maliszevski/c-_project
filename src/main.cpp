@@ -13,37 +13,21 @@ int main() {
     
     while (running) { 
         print_menu();
-            switch (get_user_choice()) {
+        int user_choice = get_user_choice();
+            switch (user_choice) {
                 case 1:
-                    if (relays[0].get_state() == true ) {
-                        std::cout << "R1 already ON." << std::endl;
-                    } else {
-                        std::cout << "R1 choosen." << std::endl;
-                        relays[0].toggle();
-                        relays[0].show_state();
-                    }
-                    break;
-
                 case 2:
-                    if (relays[1].get_state() == true ) {
-                        std::cout << "R2 already ON." << std::endl;
+                case 3: {
+                    int index = user_choice - 1;
+                    if (relays[index].get_state() == true ) {
+                        std::cout << "R" << index + 1 << " already ON." << std::endl;
                     } else {
-                        std::cout << "R2 choosen." << std::endl;
-                        relays[1].toggle();
-                        relays[1].show_state();
+                        std::cout << "R" << index + 1 << " choosen." << std::endl;
+                        relays[index].toggle();
+                        relays[index].show_state();
                     }
                     break;
-
-                case 3:
-                    if (relays[2].get_state() == true ) {
-                        std::cout << "R3 already ON." << std::endl;
-                    } else {
-                        std::cout << "R3 choosen." << std::endl;
-                        relays[2].toggle();
-                        relays[2].show_state();
-                    }
-                    break;
-
+                }
                 case 4:
                     for (int i = 0; i < relays.size(); i++) {
                         relays[i].show_state();
@@ -70,8 +54,6 @@ int main() {
     }
 }
 }
-
-
 
 //Prints text menu.
 void print_menu(){ 
