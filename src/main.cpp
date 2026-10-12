@@ -30,7 +30,7 @@ int main() {
                     break;
                 }
                 case 4:
-                    for (int i = 0; i < relays.size(); i++) {
+                    for (size_t i = 0; i < relays.size(); i++) {
                         if (relays[i].get_state() == true) {
                             std::cout << "R" << i + 1 << " state ON." << std::endl;
                         } else {
@@ -41,15 +41,25 @@ int main() {
 
                 case 5: {
                     std::cout << "Which output to disable (1-3)?" << std::endl;
-                    int output_to_disable = get_user_choice();
-                    
-                    if (output_to_disable >= 1 && output_to_disable <= 3) {
-                        relays[output_to_disable - 1].turn_off();
-                        std::cout << "R" << output_to_disable << " disabled." << std::endl;
+                    int relay_to_disable = get_user_choice();
+
+                    if (relay_to_disable >= 1 && relay_to_disable <= 3) {
+                        auto& relay = relays[relay_to_disable -1];
+
+                        if (relay.get_state() == true) {
+                            relay.turn_off();
+                            std::cout << "R" << relay_to_disable << " disabled." << std::endl;
+                        } else {
+                            std::cout << "R" << relay_to_disable << " already OFF" << std::endl;
+                        }
                     } else {
-                        std::cout << "Invalid output number. Try again." << std::endl;
-                    
+                        std::cout << "Invalid output number, please try again." << std::endl;
                     }
+                    
+                    
+                    
+
+                  
                 }
                     break;
             
