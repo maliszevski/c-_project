@@ -24,13 +24,18 @@ int main() {
                     } else {
                         std::cout << "R" << index + 1 << " choosen." << std::endl;
                         relays[index].toggle();
-                        relays[index].show_state();
+                        relays[index].get_state();
+                        std::cout << "R" << index + 1 << " state ON." << std::endl;
                     }
                     break;
                 }
                 case 4:
                     for (int i = 0; i < relays.size(); i++) {
-                        relays[i].show_state();
+                        if (relays[i].get_state() == true) {
+                            std::cout << "R" << i + 1 << " state ON." << std::endl;
+                        } else {
+                            std::cout << "R" << i + 1 << " state OFF." << std::endl;
+                        }
                     }
                     break;
 
@@ -40,8 +45,9 @@ int main() {
                     
                     if (output_to_disable >= 1 && output_to_disable <= 3) {
                         relays[output_to_disable - 1].turn_off();
+                        std::cout << "R" << output_to_disable << " disabled." << std::endl;
                     } else {
-                        std::cout << "Invalid output number. Please choose between 1 and 3." << std::endl;
+                        std::cout << "Invalid output number. Try again." << std::endl;
                     
                     }
                 }

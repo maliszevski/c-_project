@@ -11,17 +11,9 @@ bool Relay::toggle() {
     return state;
 }
 
-void Relay::turn_off() {
+bool Relay::turn_off() {
     state = false;
-    std::cout << "R" << name << " state OFF" << std::endl;
-}
-
-void Relay::show_state() const {
-    if (state) {
-        std::cout << "R" << name << " state ON." << std::endl;
-    } else {
-        std::cout << "R" << name << " state OFF." << std::endl;
-    }
+    return state;
 }
 
 bool Relay::get_state() const {

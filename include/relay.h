@@ -10,7 +10,6 @@ public:
     Relay(const std::string &relay_name);
 
     bool toggle();
-    void turn_off();
-    void show_state() const;
+    bool turn_off();
     bool get_state() const;
 };
