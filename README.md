@@ -20,18 +20,6 @@ A C++ console application designed to simulate controlling relay states (turning
 
 ---
 
-##  Project Structure
-
-project/
-├── include/
-│   └── relay.h       # Relay class declaration
-├── src/
-│   ├── main.cpp      # Menu loop and CLI interaction logic
-│   └── relay.cpp     # Relay class method implementations
-└── .gitignore
-
----
-
 ## About This Project
 
 This is my very first application written in C++. It was created as a learning project to understand the basics of:
