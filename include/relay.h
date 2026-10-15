@@ -11,5 +11,6 @@ public:
 
     bool toggle();
     bool turn_off();
-    bool get_state() const;
+    const bool& get_state() const;
+    const std::string& get_name() const;
 };

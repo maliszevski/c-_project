@@ -1,15 +1,60 @@
 #include <iostream>
-#include <string>
-#include "../include/relay.h"
 #include <array>
-
-void print_menu();
-int get_user_choice();
-
+#include "../include/relay.h"
+#include "../include/input.h"
+#include "../include/console_interface.h"
 
 int main() {
-    std::array<Relay, 3> relays = { Relay("1"), Relay("2"), Relay("3") };
+    // Relay objects initialization. By default they are set to OFF (state = false)
+    // Relays are named "1", "2", "3" (std::string) and their state is set default to OFF at the beginning.
+    std::array<Relay, 3> relays = {
+        Relay("1"),
+        Relay("2"), 
+        Relay("3")
+    }; 
+
+    //Input objects initialization. Each Input has the same name corresponding to Relay name and holds a reference to its state.
+    std::array<Input, 3> inputs = {
+        Input("1", relays[0].get_state()),
+        Input("2", relays[1].get_state()),
+        Input("3", relays[2].get_state())
+    };
+
+    //For testing purposes.
+    //relays[0].toggle(); 
+
+    //This bool is holding the whole program in a loop.
     bool running = true;
+
+
+    while (running) {
+        clear_screen();
+        print_IO_menu(relays, inputs);
+        std::cout << "             Your choice: " << std::endl;
+        int choice = get_user_choice();
+        switch (choice) {
+            case 1:
+            
+
+            default:
+            delay_ms(500);
+            break;
+        }
+        
+    } 
+
+
+    //For testing purposes. 
+    /* for (size_t i = 0; i < inputs.size(); i++) {
+        if (inputs[i].get_state() == true) {
+            std::cout << "INPUT " << i + 1 << " STATE ON " << std::endl; 
+        } else {
+            std::cout << "INPUT " << i + 1 << " STATE OFF" << std::endl;
+        }
+    }
+    */
+
+    /* bool running = true;
     
     while (running) { 
         print_menu();
@@ -69,38 +114,8 @@ int main() {
                     break;
     }
 }
+    */
 }
 
-//Prints text menu.
-void print_menu(){ 
-        std::cout << "*********************************" << std::endl;
-        std::cout << "*         Choose output:        *" << std::endl;
-        std::cout << "* 1.             R1             *" << std::endl;
-        std::cout << "* 2.             R2             *" << std::endl;
-        std::cout << "* 3.             R3             *" << std::endl;
-        std::cout << "* 4.      Show output state     *" << std::endl;
-        std::cout << "* 5.        Disable output      *" << std::endl;
-        std::cout << "*********************************" << std::endl;
-        std::cout << "           Your choice:          " << std::endl;
-}
 
-//This function is getting user choice to control switch loop.
-//If user enters invalid value, the cin.fail() returns true and it will be repeating until user enters correct value (int).
-//Then, cin.clear(); is clearing cin error state due to invalid value.
-//Finally, cin.ignore(); is clearing invalid input (max 100 chars or up to the newline char.)
-int get_user_choice(){
-    int user_choice;
-
-    while (true) {
-        std::cin >> user_choice;
-        if (std::cin.fail()){
-            std::cout << "Invalid input. Try again." << std::endl;
-            std::cin.clear();
-            std::cin.ignore(100, '\n');
-        } else {
-            std::cin.ignore(100, '\n');
-            return user_choice;
-        }
-    }
-}
 

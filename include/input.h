@@ -4,11 +4,12 @@
 class Input{
 private:
     std::string name;
-    bool state;
+    const bool &state;
 
 public:
-    Input(const std::string &input_number);
+    Input(const std::string &input_name, const bool &output_state);
 
-
+    bool get_state() const; 
+    const std::string& get_name() const;
 
 };
